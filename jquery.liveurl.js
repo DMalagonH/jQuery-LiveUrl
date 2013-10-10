@@ -292,7 +292,7 @@
       getImage: function(src, callback) {
         var concat  =  $.urlHelper.hasParam(src) ? "&" : "?";
         src        +=  concat + 'random=' + (new Date()).getTime();
-        $('<img />').attr({'src': src}).load(function() {
+        $('<img />').attr({'src': o.imageProxy(src)}).load(function() {
           var img = this;
           var tmrLoaded = window.setInterval(function() {
             if (img.width) {
@@ -383,6 +383,9 @@
 
       output.find('.thumbnail .max').text(this.curImages.length);
     },
+    imageProxy: function(src) {
+      return src;
+    },
     meta: [
       ['description','name',     'description'],
       ['description','property', 'og:description'],
@@ -459,7 +462,7 @@
 
   jQuery.yql = function yql(query, error, success) {
     var yql = {
-      path: 'http://query.yahooapis.com/v1/public/yql?q=',
+      path: 'https://query.yahooapis.com/v1/public/yql?q=',
       query: encodeURIComponent(query)
     };
 
